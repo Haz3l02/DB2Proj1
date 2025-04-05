@@ -130,13 +130,15 @@ public class Main {
                     System.out.println("File " + block_num + " was already loaded in memory");
                 }
 
-                // the frame number for the current frame
-                int frame_num = bufferPool.getFrameIndex(tempFrame) + 1;
+
 
                 tempFrame = bufferPool.getFrameWithID(block_num);
                 tempFrame.setDirty(true);
 
                 tempFrame.setRecord(record_num, record.getBytes());
+
+                // the frame number for the current frame
+                int frame_num = bufferPool.getFrameIndex(tempFrame) + 1;
 
                 System.out.println("Successfully wrote to File " + block_num + "; located in frame " + frame_num);
 
@@ -173,10 +175,10 @@ public class Main {
                     System.out.println("File " + block_num + " was already loaded in memory");
                 }
 
+                tempFrame = bufferPool.getFrameWithID(block_num);
+
                 // the frame number for the current frame
                 int frame_num = bufferPool.getFrameIndex(tempFrame) + 1;
-
-                tempFrame = bufferPool.getFrameWithID(block_num);
 
                 if(tempFrame.getPinned()){
                     System.out.println("The file " + block_num + ", was already pinned, in frame " + frame_num);
@@ -204,10 +206,10 @@ public class Main {
                     continue;
                 }
 
+                tempFrame = bufferPool.getFrameWithID(block_num);
+
                 // the frame number for the current frame
                 int frame_num = bufferPool.getFrameIndex(tempFrame) + 1;
-
-                tempFrame = bufferPool.getFrameWithID(block_num);
 
                 if(tempFrame.getPinned()){
                     System.out.println("The file " + block_num + ", was unpinned successfully (it was previously pinned), in frame " + frame_num);
